@@ -1,43 +1,61 @@
 {
-	"name": "mone",
-	"displayName": "mone",
-	"description": "vue app代码工具",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.31.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:extension.helloWorld",
-		"onCommand:extension.genarate"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.helloWorld",
-				"title": "mone hello"
-			},
-			{
-				"command": "extension.genarate",
-				"title": "mone genarate"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
-		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
-	}
+  "name": "mone",
+  "displayName": "mone",
+  "publisher": "jczzq",
+  "description": "vue app代码工具",
+  "version": "0.0.1",
+  "keywords": ["vue", "element-ui", "code generation", "代码生成"],
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.helloWorld",
+    "onCommand:extension.genarate"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.helloWorld",
+        "title": "mone hello"
+      },
+      {
+        "command": "extension.genarate",
+        "title": "mone genarate"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.genarate",
+        "key": "ctrl+shift+s",
+        "mac": "ctrl+shift+s",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [],
+      "editor/title": []
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28",
+    "tslint": "^5.12.1",
+    "@types/node": "^10.12.21",
+    "@types/mocha": "^2.2.42"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https+git@github.com:jczzq/vscode-mone.git"
+  }
 }
