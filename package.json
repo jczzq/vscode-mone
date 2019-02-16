@@ -10,14 +10,19 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.helloWorld",
+		"onCommand:extension.genarate"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"title": "mone hello"
+			},
+			{
+				"command": "extension.genarate",
+				"title": "mone genarate"
 			}
 		]
 	},
