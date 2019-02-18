@@ -2,7 +2,8 @@
 A VS Code extension for  vue app code generation.
 
 ## Features
-生成vue app代码
+通过快捷键`ctrl+shift+s`将描述页面的JSON骨架生成Vue SFC代码
+- Page
 
 
 ## Requirements

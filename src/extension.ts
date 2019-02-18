@@ -17,6 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       // Display a message box to the user
       vscode.window.showInformationMessage("Hello World mone!");
+      console.log(JSON.stringify(new PageView({})));
     }
   );
   context.subscriptions.push(disposable);

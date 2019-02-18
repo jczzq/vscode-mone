@@ -6,44 +6,55 @@ import * as vscode from "vscode";
 
 import { PageView } from "./model/Page";
 
-export function genarateDOMText(input: PageView, activeTextEditor: vscode.TextEditor) {
-    // 视图
-    let views = input.views.reduce((str, v) => {
-        const { fields } = v.config;
-        const fieldsText = fields.map(x => `<el-form-item label="${x.label}" prop="${x.name}"></el-form-item>`).join("\n");
-        return str + `<el-from>
+export function genarateDOMText(
+  input: PageView,
+  activeTextEditor: vscode.TextEditor
+) {
+  const { name, style, views } = input;
+  // 视图
+  let viewSlots = views.reduce((str, view) => {
+    const { fields } = view.config;
+    const fieldsText = fields
+      .map(
+        x => `<el-form-item label="${x.label}" prop="${x.name}"></el-form-item>`
+      )
+      .join("");
+    return (
+      str +
+      `<el-from${view.config.inline?' inline':''}>
           ${fieldsText}
-        </el-form>`;
-    }, '');
+      </el-form>`
+    );
+  }, "");
 
-    let domText = `
-<template>
-  <div class="${input.name}">
-    ${views}
-  </div>
-</template>
+  let domText = `
+    <template>
+    <div class="${name}">
+        ${viewSlots}
+    </div>
+    </template>
 
-<script>
-export default {
-    name: "${input.name}",
-    components: {},
-    data() {
-        return {
-        };
-    },
-    computed: {},
-    mounted() {},
-    watch: {},
-    methods: {},
-    filters: {}
-};
-</script>
+    <script>
+    export default {
+        name: "${name}",
+        components: {},
+        data() {
+            return {
+            };
+        },
+        computed: {},
+        mounted() {},
+        watch: {},
+        methods: {},
+        filters: {}
+    };
+    </script>
 
-<style lang="${input.style.lang}">
-.${input.name} {
-    box-sizing: border-box;
-}
-</style>
-`;
-    return domText;
+    <style lang="${style.lang}">
+    .${name} {
+        box-sizing: border-box;
+    }
+    </style>
+  `;
+  return domText;
 }

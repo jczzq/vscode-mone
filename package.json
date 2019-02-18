@@ -4,9 +4,14 @@
   "publisher": "jczzq",
   "description": "vue app代码工具",
   "version": "0.0.1",
-  "keywords": ["vue", "element-ui", "code generation", "代码生成"],
+  "keywords": [
+    "vue",
+    "element-ui",
+    "code generation",
+    "代码生成"
+  ],
   "engines": {
-    "vscode": "^1.31.0"
+    "vscode": "^1.27.0"
   },
   "categories": [
     "Other"
