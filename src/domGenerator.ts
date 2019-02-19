@@ -4,10 +4,11 @@
  */
 import * as vscode from "vscode";
 
-import { PageView } from "./model/Page";
+import { Page } from "./models";
+import GenarateField from "./genarators/Field";
 
 export function genarateDOMText(
-  input: PageView,
+  input: Page,
   activeTextEditor: vscode.TextEditor
 ) {
   const { name, style, views } = input;
@@ -16,12 +17,14 @@ export function genarateDOMText(
     const { fields } = view.config;
     const fieldsText = fields
       .map(
-        x => `<el-form-item label="${x.label}" prop="${x.name}"></el-form-item>`
+        f => {
+            return `<el-form-item label="${f.label}" prop="${f.name}">${GenarateField(f)}</el-form-item>`
+        }
       )
       .join("");
     return (
       str +
-      `<el-from${view.config.inline?' inline':''}>
+      `<el-form${view.config.inline?' inline':''}>
           ${fieldsText}
       </el-form>`
     );

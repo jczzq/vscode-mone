@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { genarateDOMText } from "./domGenerator";
-import { PageView } from "./model/Page";
+import { Page } from "./models";
 
 // 激活扩展时调用此方法
 // 您的扩展将在命令第一次执行时被激活
@@ -17,7 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
 
       // Display a message box to the user
       vscode.window.showInformationMessage("Hello World mone!");
-      console.log(JSON.stringify(new PageView({})));
     }
   );
   context.subscriptions.push(disposable);
@@ -25,11 +24,13 @@ export function activate(context: vscode.ExtensionContext) {
   // 生成代码
   let genarate = vscode.commands.registerCommand("extension.genarate", () => {
     const currentEditor = vscode.window.activeTextEditor;
-    if (!currentEditor.document.uri.fsPath.endsWith(".vue")) { return; }
+    if (!currentEditor.document.uri.fsPath.endsWith(".vue")) {
+      return;
+    }
     let input = currentEditor.document.getText();
 
     // 校验数据格式
-    let domObj: PageView;
+    let domObj: Page;
     try {
       domObj = JSON.parse(input);
     } catch (error) {
