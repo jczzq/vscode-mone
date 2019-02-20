@@ -7,10 +7,8 @@ export default (name: string, style: Style) => {
     style.lang && (langText = ` lang="${style.lang}"`);
   }
 
-  return `
-  <style${langText}>
+  return `<style${langText}>
     .${name} {
-      box-sizing: border-box;
-    }
-  </style>`;
+        box-sizing: border-box;
+    }\n</style>`;
 };

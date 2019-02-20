@@ -3,9 +3,7 @@ import GenarateField from "./field";
 import { DetailView, FormView, ListView } from "../../lib/ViewModel";
 
 export default (name: string, views: Array<any>) => {
-  let viewsText = "";
-
-  views
+  let viewsText = views
     .map(view => {
       let viewText = "";
       switch (view.type) {
@@ -18,24 +16,18 @@ export default (name: string, views: Array<any>) => {
           var vLodingText = ` v-loading="${view.name}.submitting"`;
           var fieldsText = view.fields
             .map(f => {
-              var label = f.label ? `label="${f.label}"` : "";
-              var prop = f.name ? `prop="${f.name}"` : "";
+              var label = f.label ? ` label="${f.label}"` : "";
+              var prop = f.name ? ` prop="${f.name}"` : "";
               return `<el-form-item${label}${prop}>
                 ${GenarateField(f)}
               </el-form-item>`;
             })
             .join("\n");
           fieldsText += `<el-form-item>
-              <el-button type="default" @click="$refs.${
-                view.name
-              }.resetFields()">重置</el-button>
-              <el-button type="primary" @click="${
-                view.name
-              }Submit()">提交</el-button>
+              <el-button type="default" @click="$refs.${view.name}.resetFields()">重置</el-button>
+              <el-button type="primary" @click="${view.name}Submit()">提交</el-button>
             </el-form-item>`;
-          viewText = `<el-form ref="${
-            view.name
-          }"${inline}${dataText}${rulesText}${vLodingText}${labelPositionText}${labelWidthText}>\n${fieldsText}\n</el-form>`;
+          viewText = `<el-form ref="${view.name}"${inline}${dataText}${rulesText}${vLodingText}${labelPositionText}${labelWidthText}>\n${fieldsText}\n</el-form>`;
           break;
         case ViewTypes.Detail:
           var fieldsText = view.fields

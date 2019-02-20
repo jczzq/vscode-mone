@@ -1,16 +1,16 @@
 import View, { ViewTypes } from "../models/View";
 
 export default (name: string, views: View[]) => {
-  let importText;
-  let componentsText;
-  let dataText;
-  let watchText;
-  let computedText;
-  let mountedText;
+  let importText = "";
+  let componentsText = "";
+  let dataText ="";
+  let watchText = "";
+  let computedText = "";
+  let mountedText = "";
   let methodsText = "";
 
   views.forEach(view => {
-    importText += `${view.type}View `;
+    if (!importText.includes(view.type)) importText += `${view.type}View, `;
     dataText += `${view.name}: new ${view.type}View(),\n`;
     switch (view.type) {
       case ViewTypes.Detail:
@@ -34,6 +34,7 @@ export default (name: string, views: View[]) => {
         },\n`;
         break;
       case ViewTypes.List:
+        mountedText += `this.${view.name}Load();\n`;
         methodsText += `${view.name}Load() {
           const primary = this.${view.name};
           if (primary.loading) return;
@@ -59,7 +60,7 @@ export default (name: string, views: View[]) => {
   dataText = `data() {return {${dataText}};},`;
   watchText = `watch: {},`;
   computedText = `computed: {},`;
-  mountedText = `mounted() {},`;
+  mountedText = `mounted() {\n${mountedText}\n},`;
   methodsText = `methods: {\n${methodsText}\n},`;
 
   return `<script>
@@ -72,6 +73,5 @@ export default (name: string, views: View[]) => {
     ${computedText}
     ${mountedText}
     ${methodsText}
-  };
-  </script>`;
+  };\n</script>`;
 };

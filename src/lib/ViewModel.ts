@@ -66,7 +66,7 @@ export class ListView extends ViewModel {
   sizeChange(size) {
     this.parameters.query.size = size;
   }
-  async load(loadFunction) {
+  async load() {
     try {
       const args = Array.from(arguments);
       var req = args.shift();
@@ -149,11 +149,11 @@ export class FormView extends DetailView {
   }
   submit() {
     const args = Array.from(arguments);
-    var loadFunction = args.shift();
+    var req = args.shift();
     return new Promise((resolve, reject) => {
       this.submitting = true;
-      loadFunction
-        .apply(loadFunction, args)
+      req
+        .apply(req, args)
         .then(res => {
           this.submitting = false;
           resolve(res);
