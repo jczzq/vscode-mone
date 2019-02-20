@@ -1,4 +1,4 @@
-import Field, { FieldTypes } from "../models/Field";
+import Field, { FieldTypes } from "../../models/Field";
 
 const GenarateField = (field: Field) => {
   let text;

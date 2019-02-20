@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { genarateDOMText } from "./domGenerator";
+import genarateVueText from "./genarators/vue";
 import { Page } from "./models";
 
 // 激活扩展时调用此方法
@@ -38,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     // 分析数据组装成DOM
-    const newText = genarateDOMText(domObj, currentEditor);
+    const newText = genarateVueText(domObj, currentEditor);
     currentEditor.edit(editBuilder => {
       const end = new vscode.Position(
         vscode.window.activeTextEditor.document.lineCount + 1,
