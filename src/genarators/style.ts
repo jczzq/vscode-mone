@@ -10,5 +10,5 @@ export default (name: string, style: Style) => {
   return `<style${langText}>
     .${name} {
         box-sizing: border-box;
-    }\n</style>`;
+    }\n</style>\n`;
 };

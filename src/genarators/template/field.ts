@@ -1,8 +1,10 @@
 import Field, { FieldTypes } from "../../models/Field";
+import View, { ViewTypes } from '../../models/View';
 
-const GenarateField = (field: Field) => {
+const GenarateField = (field: Field, view: View) => {
   let text;
-  let vModel = field.vModel ? ` v-model="${field.vModel}"` : "";
+  let vModelText = "";
+  field.name && (vModelText = ` v-model="${view.name}.instance.${field.name}"`);
   let placeholder = field.placeholder;
   if (placeholder && placeholder.startsWith(":")) {
     placeholder = ` :placeholder=${field.placeholder.replace(":", "")}`;
@@ -14,13 +16,13 @@ const GenarateField = (field: Field) => {
   let options: string = "";
   switch (field.type) {
     case FieldTypes.Text:
-      text = `<el-input${vModel}${placeholder}></el-input>`;
+      text = `<el-input${vModelText}${placeholder}></el-input>`;
       break;
     case FieldTypes.TextArea:
-      text = `<el-input type="textarea"${vModel}${placeholder}></el-input>`;
+      text = `<el-input type="textarea"${vModelText}${placeholder}></el-input>`;
       break;
     case FieldTypes.Number:
-      text = `<el-input-number${vModel}></el-input-number>`;
+      text = `<el-input-number${vModelText}></el-input-number>`;
       break;
     case FieldTypes.Select:
       if (Array.isArray(field.options)) {
@@ -38,12 +40,13 @@ const GenarateField = (field: Field) => {
             :value="item.value">
         </el-option>`;
       }
-      text = `<el-select${vModel}>${placeholder}${options}</el-select>`;
+      text = `<el-select${vModelText}>${placeholder}${options}</el-select>`;
       break;
     case FieldTypes.Radio:
       if (Array.isArray(field.options)) {
         options = field.options.map(opt => {
-          return `<el-radio label="${opt.value}">${opt.label}</el-radio>`;
+          const isStr = typeof opt.value === "string" ? "" : ":";
+          return `<el-radio ${isStr}label="${opt.value}">${opt.label}</el-radio>`;
         }).join("");
       } else if (typeof field.options === "string") {
         options = `<el-radio
@@ -52,7 +55,7 @@ const GenarateField = (field: Field) => {
           :label="item.value">{{ item.label }}
         </el-radio>`;
       }
-      text = `<el-radio-group${vModel}>${options}</el-radio-group>`;
+      text = `<el-radio-group${vModelText}>${options}</el-radio-group>`;
       break;
     case FieldTypes.Checkbox:
       if (Array.isArray(field.options)) {
@@ -66,28 +69,28 @@ const GenarateField = (field: Field) => {
           :label="item">
         </el-checkbox>`;
       }
-      text = `<el-checkbox-group${vModel}>${options}</el-checkbox-group>`;
+      text = `<el-checkbox-group${vModelText}>${options}</el-checkbox-group>`;
       break;
     case FieldTypes.Date:
-      text = `<el-date-picker type="date"${vModel}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="date"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.DateTime:
-      text = `<el-date-picker type="datetime"${vModel}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="datetime"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.Time:
-      text = `<el-time-picker ${vModel}${placeholder}></el-time-picker>`;
+      text = `<el-time-picker ${vModelText}${placeholder}></el-time-picker>`;
       break;
     case FieldTypes.TimeSelect:
-      text = `<el-time-select ${vModel}${placeholder}></el-time-select>`;
+      text = `<el-time-select ${vModelText}${placeholder}></el-time-select>`;
       break;
     case FieldTypes.DateRange:
-      text = `<el-date-picker type="daterange"${vModel}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="daterange"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.DateTimeRange:
-      text = `<el-date-picker type="datetimerange"${vModel}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="datetimerange"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.TimeRange:
-      text = `<el-time-picker is-range${vModel}${placeholder}></el-time-picker>`;
+      text = `<el-time-picker is-range${vModelText}${placeholder}></el-time-picker>`;
       break;
   }
   return text;

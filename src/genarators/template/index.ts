@@ -1,6 +1,5 @@
 import View, { ViewTypes } from "../../models/View";
 import GenarateField from "./field";
-import { DetailView, FormView, ListView } from "../../lib/ViewModel";
 
 export default (name: string, views: Array<any>) => {
   let viewsText = views
@@ -9,17 +8,16 @@ export default (name: string, views: Array<any>) => {
       switch (view.type) {
         case ViewTypes.Form:
           var inline = view.inline ? " inline" : "";
-          var labelPositionText = ` label-position="${view.labelPosition}"`;
-          var labelWidthText = ` label-width="${view.labelWidth}"`;
+          var labelPositionText = view.labelPosition ? ` label-position="${view.labelPosition}"` : "";
+          var labelWidthText = view.labelWidth ? ` label-width="${view.labelWidth}"` : "";
           var dataText = ` :model="${view.name}.instance"`;
           var rulesText = ` :rules="${view.name}.rules"`;
           var vLodingText = ` v-loading="${view.name}.submitting"`;
           var fieldsText = view.fields
             .map(f => {
               var label = f.label ? ` label="${f.label}"` : "";
-              var prop = f.name ? ` prop="${f.name}"` : "";
-              return `<el-form-item${label}${prop}>
-                ${GenarateField(f)}
+              return `<el-form-item${label}>
+                ${GenarateField(f, view)}
               </el-form-item>`;
             })
             .join("\n");

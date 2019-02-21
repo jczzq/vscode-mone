@@ -11,8 +11,7 @@
         {
           "name": "name",
           "label": "姓名",
-          "type": "Text",
-          "vModel": "jczzq"
+          "type": "Text"
         },
         {
           "name": "age",
@@ -37,7 +36,6 @@
           "name": "grade",
           "label": "年级",
           "type": "Select",
-          "vModel": "grade",
           "options": [
             { "label": "1年级", "value": 1 },
             { "label": "2年级", "value": 2 }
@@ -47,7 +45,6 @@
           "name": "grade",
           "label": "年级",
           "type": "Select",
-          "vModel": "grade",
           "options": "app.gradeList"
         },
         {
@@ -56,7 +53,7 @@
           "type": "Radio",
           "options": [
             { "label": "是", "value": true },
-            { "label": "否", "value": true }
+            { "label": "否", "value": false }
           ]
         },
         {
@@ -75,10 +72,7 @@
           "label": "学习时间",
           "type": "DateTimeRange"
         }
-      ],
-      "inline": false,
-      "labelPosition": "left",
-      "labelWidth": "120px"
+      ]
     },
     {
       "type": "List",

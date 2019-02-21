@@ -1,4 +1,5 @@
 import View, { ViewTypes } from "../models/View";
+import { FieldTypes } from '../models/Field';
 
 export default (name: string, views: View[]) => {
   let importText = "";
@@ -11,25 +12,30 @@ export default (name: string, views: View[]) => {
 
   views.forEach(view => {
     if (!importText.includes(view.type)) importText += `${view.type}View, `;
-    dataText += `${view.name}: new ${view.type}View(),\n`;
+    let fieldsInitText = view.fields.map(f => {
+      let def = f.type === FieldTypes.Checkbox ? "[]" : "null";
+      return `${f.name}: ${def}`;
+    }).join(",\n") || "";
+    fieldsInitText = fieldsInitText ? `{ instance: {${fieldsInitText}} }` : "";
+    dataText += `${view.name}: new ${view.type}View(${fieldsInitText}),\n`;
     switch (view.type) {
       case ViewTypes.Detail:
         methodsText += `${view.name}Load() {
           const primary = this.${view.name};
           if (primary.loading) return;
-          primary.submit(API.${view.name}.getOne, primary.instance.id);
+          primary.load(this.$api.${view.name}.getOne, primary.instance.id);
         },
         ${view.name}Delete() {
           const primary = this.${view.name};
           if (primary.deleting) return;
-          primary.delete(API.${view.name}.delete, primary.instance.id);
+          primary.delete(this.$api.${view.name}.delete, primary.instance.id);
         },\n`;
         break;
       case ViewTypes.Form:
         methodsText += `${view.name}Submit() {
           const primary = this.${view.name};
           if (primary.submitting) return;
-          let exec = primary.editing ? API.${view.name}.put : API.${view.name}.post;
+          let exec = primary.editing ? this.$api.${view.name}.put : this.$api.${view.name}.post;
           primary.submit(exec, primary.clone());
         },\n`;
         break;
@@ -38,13 +44,13 @@ export default (name: string, views: View[]) => {
         methodsText += `${view.name}Load() {
           const primary = this.${view.name};
           if (primary.loading) return;
-          primary.submit(API.${view.name}.get, primary.parameters);
+          primary.load(this.$api.${view.name}.get, primary.parameters);
         },
         async ${view.name}DeleteItem(item) {
           if (item._deleting) return;
           this.$set(item, "_deleting", true);
           try {
-            await API.${view.name}.delete(item.id);
+            await this.$api.${view.name}.delete(item.id);
           } catch (error) {
             this.$notify.error("删除失败");
           } finally {

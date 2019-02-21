@@ -6,8 +6,6 @@ export default class Field {
   name: string;
   // 字段描述
   label: string;
-  // 默认值变量名
-  vModel: string;
   // 字段类型
   type: FieldTypes = FieldTypes.Text;
   options: string | Array<Option>;
