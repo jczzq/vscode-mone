@@ -16,7 +16,8 @@ export default (name: string, views: Array<any>) => {
           var fieldsText = view.fields
             .map(f => {
               var label = f.label ? ` label="${f.label}"` : "";
-              return `<el-form-item${label}>
+              var prop = f.name ? ` prop="${f.name}"` : "";
+              return `<el-form-item${label}${prop}>
                 ${GenarateField(f, view)}
               </el-form-item>`;
             })
@@ -49,7 +50,7 @@ export default (name: string, views: Array<any>) => {
           viewText = `<el-table ${dateText}>\n${fieldsText}\n</el-table>`;
           break;
       }
-      return viewText;
+      return `<!-- ${view.type}视图 ${view.name} -->\n\n` + viewText;
     })
     .join("\n");
 

@@ -1,7 +1,7 @@
 import View, { ViewTypes } from "../models/View";
 import { FieldTypes } from '../models/Field';
 
-export default (name: string, views: View[]) => {
+export default (name: string, views: View[], ajax?) => {
   let importText = "";
   let componentsText = "";
   let dataText ="";

@@ -1,5 +1,5 @@
 import Field, { FieldTypes } from "../../models/Field";
-import View, { ViewTypes } from '../../models/View';
+import View from '../../models/View';
 
 const GenarateField = (field: Field, view: View) => {
   let text;
@@ -72,25 +72,25 @@ const GenarateField = (field: Field, view: View) => {
       text = `<el-checkbox-group${vModelText}>${options}</el-checkbox-group>`;
       break;
     case FieldTypes.Date:
-      text = `<el-date-picker type="date"${vModelText}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="date" value-format="yyyy-MM-dd"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.DateTime:
-      text = `<el-date-picker type="datetime"${vModelText}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="datetime" value-format="yyyy-MM-dd HH:mm:ss"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.Time:
-      text = `<el-time-picker ${vModelText}${placeholder}></el-time-picker>`;
+      text = `<el-time-picker value-format="HH:mm:ss"${vModelText}${placeholder}></el-time-picker>`;
       break;
     case FieldTypes.TimeSelect:
-      text = `<el-time-select ${vModelText}${placeholder}></el-time-select>`;
+      text = `<el-time-select${vModelText}${placeholder}></el-time-select>`;
       break;
     case FieldTypes.DateRange:
-      text = `<el-date-picker type="daterange"${vModelText}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="daterange" value-format="yyyy-MM-dd"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.DateTimeRange:
-      text = `<el-date-picker type="datetimerange"${vModelText}${placeholder}></el-date-picker>`;
+      text = `<el-date-picker type="datetimerange" value-format="yyyy-MM-dd HH:mm:ss"${vModelText}${placeholder}></el-date-picker>`;
       break;
     case FieldTypes.TimeRange:
-      text = `<el-time-picker is-range${vModelText}${placeholder}></el-time-picker>`;
+      text = `<el-time-picker is-range value-format="HH:mm:ss"${vModelText}${placeholder}></el-time-picker>`;
       break;
   }
   return text;

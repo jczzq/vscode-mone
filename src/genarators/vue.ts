@@ -10,6 +10,6 @@ import GenarateScript from "./script";
 import GenarateStyle from "./style";
 
 export default (input: Page, activeTextEditor: vscode.TextEditor) => {
-  const { name, style, views } = input;
-  return `${GenarateTemplate(name, views)}\n${GenarateScript(name, views)}\n${GenarateStyle(name, style)}`;
+  const { name, style, views, ajax } = input;
+  return `${GenarateTemplate(name, views)}\n${GenarateScript(name, views, ajax)}\n${GenarateStyle(name, style)}`;
 };

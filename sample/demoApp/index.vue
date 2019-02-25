@@ -9,19 +9,14 @@
       "name": "Form1",
       "fields": [
         {
-          "name": "name",
-          "label": "姓名",
+          "name": "Text",
+          "label": "Text",
           "type": "Text"
         },
         {
-          "name": "age",
-          "label": "年龄",
+          "name": "Number",
+          "label": "Number",
           "type": "Number"
-        },
-        {
-          "name": "startTime",
-          "label": "开始时间",
-          "type": "DateTime"
         }
       ],
       "inline": true,
@@ -33,8 +28,8 @@
       "name": "form2",
       "fields": [
         {
-          "name": "grade",
-          "label": "年级",
+          "name": "Select",
+          "label": "Select",
           "type": "Select",
           "options": [
             { "label": "1年级", "value": 1 },
@@ -42,14 +37,14 @@
           ]
         },
         {
-          "name": "grade",
-          "label": "年级",
+          "name": "Select2",
+          "label": "Select变量",
           "type": "Select",
-          "options": "app.gradeList"
+          "options": "[]"
         },
         {
-          "name": "isX",
-          "label": "是否结婚",
+          "name": "Radio",
+          "label": "Radio",
           "type": "Radio",
           "options": [
             { "label": "是", "value": true },
@@ -57,20 +52,40 @@
           ]
         },
         {
-          "name": "favorite",
-          "label": "兴趣",
+          "name": "Checkbox",
+          "label": "Checkbox",
           "type": "Checkbox",
           "options": ["篮球", "乒乓球", "羽毛球", "游泳"]
         },
         {
-          "name": "birthday",
-          "label": "生日",
+          "name": "Date",
+          "label": "Date",
           "type": "Date"
         },
         {
-          "name": "studyTime",
-          "label": "学习时间",
+          "name": "Time",
+          "label": "Time",
+          "type": "Time"
+        },
+        {
+          "name": "TimeSelect",
+          "label": "TimeSelect",
+          "type": "TimeSelect"
+        },
+        {
+          "name": "DateRange",
+          "label": "DateRange",
+          "type": "DateRange"
+        },
+        {
+          "name": "DateTimeRange",
+          "label": "DateTimeRange",
           "type": "DateTimeRange"
+        },
+        {
+          "name": "TimeRange",
+          "label": "TimeRange",
+          "type": "TimeRange"
         }
       ]
     },
@@ -79,8 +94,20 @@
       "name": "students",
       "fields": [
         {
+          "name": "name",
+          "label": "姓名"
+        },
+        {
+          "name": "age",
+          "label": "年龄"
+        },
+        {
           "name": "grade",
           "label": "年级"
+        },
+        {
+          "name": "studyTime",
+          "label": "上学时间"
         }
       ]
     },
@@ -89,8 +116,20 @@
       "name": "student",
       "fields": [
         {
+          "name": "name",
+          "label": "姓名"
+        },
+        {
+          "name": "age",
+          "label": "年龄"
+        },
+        {
           "name": "grade",
           "label": "年级"
+        },
+        {
+          "name": "studyTime",
+          "label": "上学时间"
         }
       ]
     }
