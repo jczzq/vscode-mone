@@ -6,6 +6,7 @@ export default (name: string, views: Array<any>) => {
     .map(view => {
       let viewText = "";
       switch (view.type) {
+        // Form
         case ViewTypes.Form:
           var inline = view.inline ? " inline" : "";
           var labelPositionText = view.labelPosition ? ` label-position="${view.labelPosition}"` : "";
@@ -27,7 +28,12 @@ export default (name: string, views: Array<any>) => {
               <el-button type="primary" @click="${view.name}Submit()">提交</el-button>
             </el-form-item>`;
           viewText = `<el-form ref="${view.name}"${inline}${dataText}${rulesText}${vLodingText}${labelPositionText}${labelWidthText}>\n${fieldsText}\n</el-form>`;
+          if (view.dialog) {
+            viewText = `<el-dialog title="${view.name}" :visible.sync="${view.name}.visible">${viewText}</el-dialog>`
+          }
           break;
+
+        // Detail
         case ViewTypes.Detail:
           var fieldsText = view.fields
             .map(f => {
@@ -38,6 +44,8 @@ export default (name: string, views: Array<any>) => {
             .join("\n");
           viewText = `<el-card shadow="hover">\n${fieldsText}\n</el-card>`;
           break;
+
+        // List
         case ViewTypes.List:
           var dateText = `:data="${view.name}.rows"`;
           var fieldsText = view.fields

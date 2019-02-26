@@ -2,7 +2,9 @@
 
 ## [v1.0.1]
 
-- Initial release
+Added:
+
+- Form 视图增加 dialog 属性
 
 ## v1.0.0
 

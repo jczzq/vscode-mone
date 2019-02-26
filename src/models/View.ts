@@ -22,14 +22,16 @@ export default class View {
 export class FormView extends View {
   // 是否为行内表单
   inline: boolean = false;
-  labelPosition: string = "right";
+  labelPosition: string;
   labelWidth: string;
+  dialog: boolean;
   constructor(data?) {
     super(data);
     if (data) {
       this.inline = data.inline;
       this.labelPosition = data.labelPosition;
       this.labelWidth = data.labelWidth;
+      this.dialog = data.dialog === true;
     }
   }
 }
