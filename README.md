@@ -10,8 +10,8 @@ A VS Code extension for  vue app code generation.
 
 - `ViewModel`: 一份运行时的视图模型，配合生成的代码完善SFC的功能
 
-## Requirements
-None
+## Usage
+安装VSCode插件`mone`
 
 ## Extension Settings
 This extension contributes the following settings:
