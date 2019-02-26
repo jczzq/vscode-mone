@@ -1,6 +1,6 @@
 # vscode-mone
 
-![asd](./sample/sample.gif)
+![asd](sample/sample.gif)
 
 A VS Code extension for vue app code generation.
 
