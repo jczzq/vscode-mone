@@ -31,14 +31,20 @@ export default (name: string, views: View[], ajax?) => {
           primary.delete(this.$api.${view.name}.delete, primary.instance.id);
         },\n`;
         break;
+
       case ViewTypes.Form:
-        methodsText += `${view.name}Submit() {
+        let dialogText = "";
+        if (view.dialog) {
+          dialogText = `show(){\nthis.${view.name}.visible = true;\n},\n`;
+        }
+        methodsText += `${dialogText}${view.name}Submit() {
           const primary = this.${view.name};
           if (primary.submitting) return;
           let exec = primary.editing ? this.$api.${view.name}.put : this.$api.${view.name}.post;
           primary.submit(exec, primary.clone());
         },\n`;
         break;
+
       case ViewTypes.List:
         mountedText += `this.${view.name}Load();\n`;
         methodsText += `${view.name}Load() {
