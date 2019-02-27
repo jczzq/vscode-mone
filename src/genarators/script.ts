@@ -4,6 +4,7 @@ import { FieldTypes } from '../models/Field';
 export default (name: string, views: Array<any>, ajax?) => {
   let importText = "";
   let componentsText = "";
+  let fieldsInitText ="";
   let dataText ="";
   let watchText = "";
   let computedText = "";
@@ -12,12 +13,7 @@ export default (name: string, views: Array<any>, ajax?) => {
 
   views.forEach(view => {
     if (!importText.includes(view.type)) importText += `${view.type}View, `;
-    let fieldsInitText = view.fields.map(f => {
-      let def = f.type === FieldTypes.Checkbox ? "[]" : "null";
-      return `${f.name}: ${def}`;
-    }).join(",\n") || "";
-    fieldsInitText = fieldsInitText ? `{ instance: {${fieldsInitText}} }` : "";
-    dataText += `${view.name}: new ${view.type}View(${fieldsInitText}),\n`;
+
     switch (view.type) {
       case ViewTypes.Detail:
         methodsText += `${view.name}Load() {
@@ -37,6 +33,11 @@ export default (name: string, views: Array<any>, ajax?) => {
         if (view.dialog) {
           dialogText = `show(){\nthis.${view.name}.visible = true;\n},\n`;
         }
+        fieldsInitText = view.fields.map(f => {
+          let def = f.type === FieldTypes.Checkbox ? "[]" : "null";
+          return `${f.name}: ${def}`;
+        }).join(",\n") || "";
+        fieldsInitText = fieldsInitText ? `{ instance: {${fieldsInitText}} }` : "";
         methodsText += `${dialogText}${view.name}Submit() {
           const primary = this.${view.name};
           if (primary.submitting) return;
@@ -65,6 +66,7 @@ export default (name: string, views: Array<any>, ajax?) => {
         },\n`;
         break;
     }
+    dataText += `${view.name}: new ${view.type}View(${fieldsInitText}),\n`;dataText += `${view.name}: new ${view.type}View(${fieldsInitText}),\n`;dataText += `${view.name}: new ${view.type}View(${fieldsInitText}),\n`;
   });
   importText &&
     (importText = `import { ${importText}} from "@/models/ViewModel.js";`);
