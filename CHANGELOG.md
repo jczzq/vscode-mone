@@ -1,5 +1,23 @@
 # Change Log
 
+## v1.1.3
+
+Fixed:
+
+- script里面的data model重复生成
+
+## v1.1.2
+
+Fixed:
+
+- fields init text
+
+## v1.1.1
+
+Fixed:
+
+- view type
+
 ## v1.1.0
 
 Added:
